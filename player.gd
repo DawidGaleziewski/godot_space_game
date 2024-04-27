@@ -1,10 +1,13 @@
 extends Area2D
 
+signal hit;
+
 @export var speed = 400; # speed pixels/sec
 var screen_size: Vector2;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#hide();
 #as ready fires when node enters the screen so it is good to check the vieport size
 	screen_size = get_viewport_rect().size;
 
@@ -45,3 +48,16 @@ func _process(delta):
 	position += velocity * delta;
 	# we use clamp to prevent user from leaving the screen
 	position = position.clamp(Vector2.ZERO, screen_size);
+
+
+func _on_body_entered(body):
+	hide(); # hide player
+	hit.emit(); # emit signal on hit
+	$CollisionShape2D.set_deferred("disabled", true); # disable collision so we don't emit more. We use deffered as:
+	# we can't change physics properties on a physics callback.
+	# if we disable collision during engine processing it can throw a error
+
+func start(pos):
+	position = pos;
+	show();
+	$CollisionShape2D.disabled = false;
