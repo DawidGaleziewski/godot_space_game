@@ -47,7 +47,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2e4b6"]
 size = Vector2(139, 56)
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
 gravity_scale = 1.66533e-16
 script = ExtResource("1_ls4jf")
@@ -57,7 +57,7 @@ metadata/_edit_group_ = true
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_okdp8")
 animation = &"fly"
-frame_progress = 0.164768
+frame_progress = 0.625936
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9.09963e-07, 0.499999)
