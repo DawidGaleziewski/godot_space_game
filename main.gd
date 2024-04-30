@@ -22,8 +22,11 @@ func game_over():
 	$ScoreTimer.stop();
 	$MobTimer.stop();
 	$HUD.show_game_over();
+	$Music.stop();
+	$DeathSound.play();
 	
 func new_game():
+	$DeathSound.stop();
 	# group is setup next to signals in mobs scene. We can call a group with a specific method. This way we can destroy all creeps
 	get_tree().call_group("mobs", "queue_free");
 	score = 0;
@@ -31,6 +34,7 @@ func new_game():
 	$HUD.show_message("Get Ready");
 	$Player.start($StartPosition.position);
 	$StartTimer.start(); # this will start other timers
+	$Music.play();
 
 
 func _on_score_timer_timeout():
